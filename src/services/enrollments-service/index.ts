@@ -7,24 +7,21 @@ import { Address, Enrollment } from "@prisma/client";
 import { ViaCEPAddress, ViaCEPAddressDB } from "@/protocols";
 
 async function getAddressFromCEP(cep: string): Promise<ViaCEPAddress> {
-  const result = await request.get("https://viacep.com.br/ws/37440000/json/"); 
+  const result = await request.get(`https://viacep.com.br/ws/${cep}/json/`); 
 
   if (!result.data) {
     throw notFoundError();
   }
 
-  const adress = result.data
-    .filter((value: ViaCEPAddressDB) => value.cep === cep)
-    .map((value: ViaCEPAddressDB) => ({
-      logradouro: value.logradouro,
-      complemento: value.complemento,
-      bairro: value.bairro,
-      localidade: value.localidade,
-      uf: value.uf
-    }));
-  console.log(adress);
+  const adress: ViaCEPAddressDB = result.data;
 
-  return adress;
+  return {
+    logradouro: adress.logradouro,
+    complemento: adress.complemento,
+    bairro: adress.bairro,
+    cidade: adress.localidade,
+    uf: adress.uf
+  };
 }
 
 async function getOneWithAddressByUserId(userId: number): Promise<GetOneWithAddressByUserIdResult> {
@@ -55,10 +52,16 @@ async function createOrUpdateEnrollmentWithAddress(params: CreateOrUpdateEnrollm
   const enrollment = exclude(params, "address");
   const address = getAddressForUpsert(params.address);
 
+  const result = await request.get(`https://viacep.com.br/ws/${address.cep}/json/`);
+
+  if (result.status === 400 || result.data.erro) {
+    throw requestError(400, "BAD_REQUEST");
+  }
+  
   //TODO - Verificar se o CEP é válido
   const newEnrollment = await enrollmentRepository.upsert(params.userId, enrollment, exclude(enrollment, "userId"));
 
-  await addressRepository.upsert(newEnrollment.id, address, address);
+  await addressRepository.upsert(newEnrollment.id, address, address);  
 }
 
 function getAddressForUpsert(address: CreateAddressParams) {
