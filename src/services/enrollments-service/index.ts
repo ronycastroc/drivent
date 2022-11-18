@@ -54,7 +54,7 @@ async function createOrUpdateEnrollmentWithAddress(params: CreateOrUpdateEnrollm
 
   const result = await request.get(`https://viacep.com.br/ws/${address.cep}/json/`);
 
-  if (result.status === 400 || result.data.erro) {
+  if (result.data.erro) {
     throw requestError(400, "BAD_REQUEST");
   }
   
