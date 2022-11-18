@@ -40,4 +40,15 @@ export type TicketAndTicketTypeEntity = {
   createdAt: Date,
   updatedAt: Date,
   TicketType: TicketType
- };
+};
+
+export type PaymentEntity = {
+	ticketId: number,
+	cardData: {
+		issuer: string,
+    number: number,
+    name: string,
+    expirationDate: Date,
+    cvv: number
+	}
+};

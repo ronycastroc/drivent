@@ -4,7 +4,18 @@ async function findMany() {
   return prisma.ticketType.findMany();
 }
 
-async function findTicketById(enrollmentId: number) {
+async function findTicketById(ticketId: number) {
+  return prisma.ticket.findUnique({
+    where: {
+      id: ticketId
+    },
+    include: {
+      TicketType: true
+    }
+  });
+}
+
+async function findTicketByEnrollmentId(enrollmentId: number) {
   return prisma.ticket.findFirst({
     where: { enrollmentId },
     include: {
@@ -23,10 +34,23 @@ async function create(ticketTypeId: number, enrollmentId: number) {
   });
 } 
 
+async function update(ticketId: number) {
+  return await prisma.ticket.update({
+    where: {
+      id: ticketId
+    },
+    data: {
+      status: "PAID"
+    }
+  });
+}
+
 const ticketRepository = {
   findMany,
   findTicketById,
-  create
+  findTicketByEnrollmentId,
+  create,
+  update
 };
 
 export default ticketRepository;
