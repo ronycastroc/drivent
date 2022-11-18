@@ -7,7 +7,7 @@ async function getTicketTypes(): Promise<TicketType[]> {
   return await ticketRepository.findMany();
 }
 
-async function getTicketById(ticketId: number): Promise<Ticket> {
+async function getTicketById(ticketId: number): Promise<TicketAndTicketTypeEntity> {
   return await ticketRepository.findTicketById(ticketId);
 }
 
@@ -23,11 +23,16 @@ async function  createTicket(ticketTypeId: number, enrollmentId: number) {
   return await ticketRepository.create(ticketTypeId, enrollmentId);
 }
 
+async function updateTicket(ticketId: number): Promise<Ticket> {
+  return await ticketRepository.update(ticketId);
+}
+
 const ticketsService = {
   getTicketTypes,
   getTicketById,
   getTicketByEnrollmentId,
-  createTicket  
+  createTicket,
+  updateTicket  
 };
 
 export default ticketsService;
