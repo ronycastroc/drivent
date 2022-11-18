@@ -26,7 +26,7 @@ export async function getTicketTypesById(req: AuthenticatedRequest, res: Respons
 
     const enrollmentId = getEnrollmentByUserId.id;
 
-    const ticket = await ticketsService.getTicketById(enrollmentId);
+    const ticket = await ticketsService.getTicketByEnrollmentId(enrollmentId);
 
     if(!ticket.enrollmentId) {
       return res.sendStatus(httpStatus.NOT_FOUND);
@@ -53,7 +53,7 @@ export async function createTicket(req: AuthenticatedRequest, res: Response) {
 
     await ticketsService.createTicket(ticketTypeId, enrollmentId);
 
-    const ticket = await ticketsService.getTicketById(enrollmentId);
+    const ticket = await ticketsService.getTicketByEnrollmentId(enrollmentId);
 
     return res.status(httpStatus.CREATED).send(ticket);
   } catch (error) {
