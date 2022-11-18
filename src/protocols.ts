@@ -9,7 +9,7 @@ export type ViaCEPAddress = {
   logradouro: string,
   complemento: string,
   bairro: string,
-  localidade: string,
+  cidade: string,
   uf: string,
 
 };
@@ -40,4 +40,4 @@ export type TicketAndTicketTypeEntity = {
   createdAt: Date,
   updatedAt: Date,
   TicketType: TicketType
-};
+ };
