@@ -54,7 +54,7 @@ export async function createPayment(req: AuthenticatedRequest, res: Response) {
     }
 
     const numberCardToString = paymentBody.cardData.number.toString();
-    const cardLastDigits = numberCardToString.slice(numberCardToString.length - 4);
+    const cardLastDigits = numberCardToString.slice(-4);
 
     const paymentDataCreate = {
       ticketId: paymentBody.ticketId,
