@@ -14,6 +14,7 @@ export type ViaCEPAddress = {
 
 };
 
+//Regra de Negócio
 export type AddressEnrollment = {
   logradouro: string,
   complemento: string,
@@ -52,3 +53,15 @@ export type PaymentEntity = {
     cvv: number
 	}
 }
+export type ViaCEPAddressDB = {
+  cep: string,
+  logradouro: string,
+  complemento: string,
+  bairro: string,
+  localidade: string,
+  uf: string,
+  ibge: string,
+  gia: string,
+  ddd: string,
+  siafi: string
+};
