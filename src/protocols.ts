@@ -1,5 +1,4 @@
 import { Room, TicketType } from "@prisma/client";
-import { type } from "os";
 
 export type ApplicationError = {
   name: string;
