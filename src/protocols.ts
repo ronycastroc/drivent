@@ -1,4 +1,5 @@
-import { TicketType } from "@prisma/client";
+import { Room, TicketType } from "@prisma/client";
+import { type } from "os";
 
 export type ApplicationError = {
   name: string;
@@ -11,7 +12,6 @@ export type ViaCEPAddress = {
   bairro: string,
   cidade: string,
   uf: string,
-
 };
 
 export type AddressEnrollment = {
@@ -21,7 +21,6 @@ export type AddressEnrollment = {
   cidade: string,
   uf: string,
   error?: string
-
 }
 
 export type RequestError = {
@@ -52,3 +51,26 @@ export type PaymentEntity = {
     cvv: number
 	}
 };
+
+export type ViaCEPAddressDB = {
+  cep: string,
+  logradouro: string,
+  complemento: string,
+  bairro: string,
+  localidade: string,
+  uf: string,
+  ibge: string,
+  gia: string,
+  ddd: string,
+  siafi: string
+};
+
+export type HotelRoomsEntity = {
+  id: number,
+  name: string,
+  image: string,
+  createdAt: Date,
+  updatedAt: Date,
+  Rooms: Room[]
+};
+
