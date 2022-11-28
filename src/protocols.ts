@@ -10,12 +10,10 @@ export type ViaCEPAddress = {
   logradouro: string,
   complemento: string,
   bairro: string,
-  localidade: string,
+  cidade: string,
   uf: string,
-
 };
 
-//Regra de Negócio
 export type AddressEnrollment = {
   logradouro: string,
   complemento: string,
@@ -23,7 +21,6 @@ export type AddressEnrollment = {
   cidade: string,
   uf: string,
   error?: string
-
 }
 
 export type RequestError = {
@@ -53,7 +50,8 @@ export type PaymentEntity = {
     expirationDate: Date,
     cvv: number
 	}
-}
+};
+
 export type ViaCEPAddressDB = {
   cep: string,
   logradouro: string,
@@ -75,3 +73,4 @@ export type HotelRoomsEntity = {
   updatedAt: Date,
   Rooms: Room[]
 };
+
