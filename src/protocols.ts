@@ -1,4 +1,5 @@
-import { TicketType } from "@prisma/client";
+import { Room, TicketType } from "@prisma/client";
+import { type } from "os";
 
 export type ApplicationError = {
   name: string;
@@ -64,4 +65,13 @@ export type ViaCEPAddressDB = {
   gia: string,
   ddd: string,
   siafi: string
+};
+
+export type HotelRoomsEntity = {
+  id: number,
+  name: string,
+  image: string,
+  createdAt: Date,
+  updatedAt: Date,
+  Rooms: Room[]
 };
