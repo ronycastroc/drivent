@@ -63,13 +63,3 @@ export type ViaCEPAddressDB = {
   ddd: string,
   siafi: string
 };
-
-export type HotelRoomsEntity = {
-  id: number,
-  name: string,
-  image: string,
-  createdAt: Date,
-  updatedAt: Date,
-  Rooms: Room[]
-};
-
