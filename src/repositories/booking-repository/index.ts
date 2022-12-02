@@ -16,7 +16,7 @@ async function findBookingByUserId(userId: number) {
 }
 
 const bookingRepository = {
-  findBookingByUserId,
+  findBookingByUserId
 };
 
 export default bookingRepository;
