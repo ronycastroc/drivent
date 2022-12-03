@@ -15,8 +15,31 @@ async function findBookingByUserId(userId: number) {
   });
 }
 
+async function findBookingCountByRoomId(roomId: number) {
+  return prisma.booking.groupBy({
+    by: ["roomId"],
+    _count: {
+      roomId: true,
+    },
+    where: {
+      roomId,
+    }
+  });
+}
+
+async function create(roomId: number, userId: number) {
+  return await prisma.booking.create({
+    data: {
+      userId,
+      roomId,      
+    }
+  });
+}
+
 const bookingRepository = {
-  findBookingByUserId
+  findBookingByUserId,
+  create,
+  findBookingCountByRoomId
 };
 
 export default bookingRepository;
