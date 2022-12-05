@@ -1,7 +1,7 @@
 import { prisma } from "@/config";
 
 async function findBookingByUserId(userId: number) {
-  return prisma.booking.findFirst({
+  return await prisma.booking.findFirst({
     where: {
       userId,
     },    
@@ -16,7 +16,7 @@ async function findBookingByUserId(userId: number) {
 }
 
 async function findBookingCountByRoomId(roomId: number) {
-  return prisma.booking.groupBy({
+  return await prisma.booking.groupBy({
     by: ["roomId"],
     _count: {
       roomId: true,

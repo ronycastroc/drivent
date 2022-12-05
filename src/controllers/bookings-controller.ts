@@ -26,11 +26,11 @@ export async function createBooking(req: AuthenticatedRequest, res: Response) {
 
     const bookingResult = await bookingService.createBooking(roomId, userId);
 
-    return res.status(httpStatus.OK).send(bookingResult);
-  } catch (error) {
-    if(error.name === "NotFoundError") {
-      return res.sendStatus(httpStatus.NOT_FOUND);
-    }    
-    return res.sendStatus(httpStatus.FORBIDDEN);
+    return res.status(httpStatus.OK).send({ bookingId: bookingResult.id });
+  } catch (error) {    
+    if(error.name === "ForbiddenError") {
+      return res.sendStatus(httpStatus.FORBIDDEN);
+    }
+    return res.sendStatus(httpStatus.NOT_FOUND);    
   }
 }
