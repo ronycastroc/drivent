@@ -61,7 +61,7 @@ async function updateBooking(roomId: number, userId: number, bookingId: number) 
   const capacity = await bookingRepository.findBookingCountByRoomId(roomId);
   const bookingById = await bookingRepository.findBookingById(bookingId);
 
-  if(capacity[0]?._count.roomId === room.capacity || !bookingByUserId.id || !bookingById) {
+  if(capacity[0]?._count.roomId === room.capacity || !bookingByUserId || !bookingById) {
     throw forbiddenError();
   }
 
